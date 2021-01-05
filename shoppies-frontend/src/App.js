@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import LiveSearch from './components/LiveSearch';
 
 export default function App() {
   const [message, setMessage] = useState('Click to fetch data!');
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <div class="container mw-100">
+      <LiveSearch />
       <div>
         <h1>{message}</h1>
         <button onClick={fetchData}>Fetch Data</button>
