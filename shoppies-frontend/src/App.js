@@ -21,10 +21,6 @@ export default function App() {
   return (
     <div class="container mw-100">
       <LiveSearch />
-      <div>
-        <h1>{message}</h1>
-        <button onClick={fetchData}>Fetch Data</button>
-      </div>
     </div>
   );
 }
