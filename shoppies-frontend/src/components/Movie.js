@@ -13,7 +13,7 @@ export default function Movie(props) {
       <img className="movie__thumbnail" src={props.Poster} alt="Movie" />
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
-        <div className="movie__artist">{props.artistName}</div>
+        <div className="movie__artist">{props.Year}</div>
       </div>
     </article>
   );

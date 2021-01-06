@@ -9,7 +9,7 @@ export default function LiveSearch(props) {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    const testURL = `http://www.omdbapi.com/?s=${term}&page=1&apikey=${process.env.REACT_APP_API_KEY}`;
+    const testURL = `http://www.omdbapi.com/?s=${term}&page=1&type=movie&apikey=${process.env.REACT_APP_API_KEY}`;
 
     axios.get(testURL).then((response) => {
       if (response.data.Response === 'True') {
@@ -23,7 +23,7 @@ export default function LiveSearch(props) {
   return (
     <Fragment>
       <header className="logo">
-        <img src="images/brand.png" alt="Brand" />
+        <img className="branding" src="images/shoppiesbrand.png" alt="Brand" />
       </header>
       <main>
         <SearchBar onSearch={(term) => setTerm(term)} />
