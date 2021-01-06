@@ -1,5 +1,14 @@
 # UX Developer Intern & Web Developer Intern Challenge - Summer 2021
 
+# Getting Started
+
+1. Fork and clone the project
+2. cd to the shoppies-backend directory and run bundle-install
+3. cd to the shoppies-frontend directory and run yarn install.
+4. in the shoppies-backend directory run the the following:
+
+`foreman start -p 3000`
+
 ## The Shoppies: Movie awards for entrepreneurs
 
 <b>Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.</b>
