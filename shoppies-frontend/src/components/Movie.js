@@ -3,10 +3,13 @@ import React from 'react';
 import classnames from 'classnames';
 
 export default function Movie(props) {
-  console.log(props);
   const movieInfoClass = classnames('movie__info', {
     'movie__info--explicit': props.collectionExplicitness === 'explicit',
   });
+
+  const handleClick = () => {
+    console.log(props.Title);
+  };
 
   return (
     <article className="movie">
@@ -14,7 +17,9 @@ export default function Movie(props) {
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
         <div className="movie__artist">{props.Year}</div>
-        <button className="nominate__btn">Nominate</button>
+        <button className="nominate__btn" onClick={handleClick}>
+          Nominate
+        </button>
       </div>
     </article>
   );
