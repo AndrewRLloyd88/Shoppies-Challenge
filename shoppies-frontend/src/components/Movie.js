@@ -14,6 +14,7 @@ export default function Movie(props) {
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
         <div className="movie__artist">{props.Year}</div>
+        <button className="nominate__btn">Nominate</button>
       </div>
     </article>
   );
