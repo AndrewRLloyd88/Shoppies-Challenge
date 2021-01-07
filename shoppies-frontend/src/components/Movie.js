@@ -3,7 +3,6 @@ import React from 'react';
 import classnames from 'classnames';
 
 export default function Movie(props) {
-  console.log(props);
   const movieInfoClass = classnames('movie__info', {
     'movie__info--explicit': props.collectionExplicitness === 'explicit',
   });

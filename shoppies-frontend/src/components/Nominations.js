@@ -3,7 +3,6 @@ import React from 'react';
 import Nomination from './Nomination';
 
 export default function Nominations(props) {
-  console.log(props);
   const { nominations } = props;
 
   //index is a number in this case

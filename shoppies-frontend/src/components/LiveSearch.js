@@ -22,6 +22,7 @@ export default function LiveSearch(props) {
     });
   };
 
+  //delete nominations by index from the array
   function deleteNomination(id) {
     setNominations((prevNominations) => {
       return prevNominations.filter((nomination, index) => {
