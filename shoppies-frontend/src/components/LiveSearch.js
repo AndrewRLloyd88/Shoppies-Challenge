@@ -3,10 +3,26 @@ import axios from 'axios';
 
 import SearchBar from './SearchBar';
 import Results from './Results';
+import Nominations from './Nominations';
 
 export default function LiveSearch(props) {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
+  const [nominations, setNominations] = useState([]);
+
+  //for when a user wants to add a nomination
+  const addNomination = (movie) => {
+    const newNomination = nominations;
+    newNomination.push({
+      Title: movie.Title,
+      Year: movie.Year,
+      Poster: movie.Poster,
+    });
+    setNominations(newNomination);
+    console.log(nominations);
+    //triggers a re-render
+    setTerm('');
+  };
 
   //triggers on term changing
   useEffect(() => {
@@ -17,26 +33,31 @@ export default function LiveSearch(props) {
     axios.get(mainURL).then((response) => {
       if (response.data.Response === 'True') {
         setResults([...response.data.Search]);
-        console.log(response.data);
-        console.log(response.data.Response);
       } else if (response.data.Response === 'False') {
         axios.get(fallbackURL).then((response) => {
-          if (response.data.Response === 'True') console.log(response);
-          setResults([response.data]);
+          if (response.data.Response === 'True') setResults([response.data]);
         });
       }
     });
   }, [term]);
 
   return (
-    <Fragment>
+    <>
       <header className="logo">
         <img className="branding" src="images/shoppiesbrand.png" alt="Brand" />
-      </header>
-      <main>
         <SearchBar onSearch={(term) => setTerm(term)} />
-        <Results results={results} />
+      </header>
+
+      <main>
+        <div className="main-container">
+          <div className="results-container">
+            <Results results={results} addNomination={addNomination} />
+          </div>
+          <div className="results-container">
+            <Nominations nominations={nominations} />
+          </div>
+        </div>
       </main>
-    </Fragment>
+    </>
   );
 }

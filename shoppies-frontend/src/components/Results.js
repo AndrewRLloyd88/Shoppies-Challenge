@@ -11,7 +11,11 @@ export default function Results(props) {
     }
     return (
       <>
-        <Movie key={movie.collectionId} {...movie} />
+        <Movie
+          key={movie.collectionId}
+          {...movie}
+          addNomination={props.addNomination}
+        />
       </>
     );
   });

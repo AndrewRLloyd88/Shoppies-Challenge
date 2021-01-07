@@ -18,9 +18,5 @@ export default function App() {
       });
   };
 
-  return (
-    <div class="container mw-100">
-      <LiveSearch />
-    </div>
-  );
+  return <LiveSearch />;
 }
