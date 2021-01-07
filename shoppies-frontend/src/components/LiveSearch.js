@@ -10,6 +10,12 @@ export default function LiveSearch(props) {
   const [results, setResults] = useState([]);
   const [nominations, setNominations] = useState([]);
 
+  //check if results are nominated
+  // const isNominated = () => {
+  //   //does result
+  //   return true;
+  // };
+
   //for when a user wants to add a nomination
   const addNomination = (movie) => {
     const newNomination = {
@@ -62,7 +68,11 @@ export default function LiveSearch(props) {
       <main>
         <div className="main-container">
           <div className="results-container">
-            <Results results={results} addNomination={addNomination} />
+            <Results
+              results={results}
+              addNomination={addNomination}
+              nominations={nominations}
+            />
           </div>
           <div className="results-container">
             <Nominations

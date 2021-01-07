@@ -7,6 +7,15 @@ export default function Movie(props) {
     'movie__info--explicit': props.collectionExplicitness === 'explicit',
   });
 
+  const isNominated = () => {
+    for (const nomination of props.nominations) {
+      if (props.Title === nomination.Title) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   const handleClick = () => {
     props.addNomination(props);
   };
@@ -18,9 +27,13 @@ export default function Movie(props) {
         <div className="movie__name">{props.Title}</div>
         <div className="movie__year">{props.Year}</div>
         <div>
-          <button className="nominate__btn" onClick={handleClick}>
-            Nominate
-          </button>
+          {isNominated() ? (
+            <p class="nominated_label">Nominated</p>
+          ) : (
+            <button className="nominate__btn" onClick={handleClick}>
+              Nominate
+            </button>
+          )}
         </div>
       </div>
     </article>

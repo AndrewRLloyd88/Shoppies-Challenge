@@ -15,6 +15,7 @@ export default function Results(props) {
           key={movie.collectionId}
           {...movie}
           addNomination={props.addNomination}
+          nominations={props.nominations}
         />
       </>
     );
