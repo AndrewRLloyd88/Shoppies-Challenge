@@ -12,16 +12,17 @@ export default function LiveSearch(props) {
 
   //for when a user wants to add a nomination
   const addNomination = (movie) => {
-    const newNomination = nominations;
-    newNomination.push({
+    const newNomination = {
       Title: movie.Title,
       Year: movie.Year,
       Poster: movie.Poster,
+    };
+    setNominations((prevNominations) => {
+      return [...prevNominations, newNomination];
     });
-    setNominations(newNomination);
-    console.log(nominations);
-    //triggers a re-render
-    setTerm([]);
+    // console.log(nominations);
+    // //triggers a re-render
+    // setTerm([]);
   };
 
   //triggers on term changing
