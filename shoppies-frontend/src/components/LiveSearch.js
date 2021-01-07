@@ -21,7 +21,7 @@ export default function LiveSearch(props) {
     setNominations(newNomination);
     console.log(nominations);
     //triggers a re-render
-    setTerm('');
+    setTerm([]);
   };
 
   //triggers on term changing
