@@ -22,6 +22,14 @@ export default function LiveSearch(props) {
     });
   };
 
+  function deleteNomination(id) {
+    setNominations((prevNominations) => {
+      return prevNominations.filter((nomination, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   //triggers on term changing
   useEffect(() => {
     const mainURL = `http://www.omdbapi.com/?s=${term}&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`;
@@ -56,7 +64,10 @@ export default function LiveSearch(props) {
             <Results results={results} addNomination={addNomination} />
           </div>
           <div className="results-container">
-            <Nominations nominations={nominations} />
+            <Nominations
+              nominations={nominations}
+              deleteNomination={deleteNomination}
+            />
           </div>
         </div>
       </main>

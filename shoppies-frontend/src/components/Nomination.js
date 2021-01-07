@@ -2,12 +2,14 @@ import React from 'react';
 import classnames from 'classnames';
 
 export default function Nomination(props) {
+  console.log(props);
   const movieInfoClass = classnames('movie__info', {
     'movie__info--explicit': props.collectionExplicitness === 'explicit',
   });
 
   const handleClick = () => {
     console.log(props.Title);
+    props.deleteNomination(props.index);
   };
 
   return (

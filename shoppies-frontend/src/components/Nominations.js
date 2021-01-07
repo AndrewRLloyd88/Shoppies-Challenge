@@ -6,10 +6,16 @@ export default function Nominations(props) {
   console.log(props);
   const { nominations } = props;
 
-  return nominations.map((nomination) => {
+  //index is a number in this case
+  return nominations.map((nomination, index) => {
     return (
       <>
-        <Nomination {...nomination} />
+        <Nomination
+          key={index}
+          index={index}
+          {...nomination}
+          deleteNomination={props.deleteNomination}
+        />
       </>
     );
   });
