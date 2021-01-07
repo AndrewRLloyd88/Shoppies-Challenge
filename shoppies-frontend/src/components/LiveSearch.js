@@ -20,9 +20,6 @@ export default function LiveSearch(props) {
     setNominations((prevNominations) => {
       return [...prevNominations, newNomination];
     });
-    // console.log(nominations);
-    // //triggers a re-render
-    // setTerm([]);
   };
 
   //triggers on term changing
@@ -36,7 +33,11 @@ export default function LiveSearch(props) {
         setResults([...response.data.Search]);
       } else if (response.data.Response === 'False') {
         axios.get(fallbackURL).then((response) => {
-          if (response.data.Response === 'True') setResults([response.data]);
+          if (response.data.Response === 'True') {
+            setResults([response.data]);
+          } else {
+            setResults([]);
+          }
         });
       }
     });
