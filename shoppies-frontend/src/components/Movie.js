@@ -9,7 +9,7 @@ export default function Movie(props) {
 
   const isNominated = () => {
     for (const nomination of props.nominations) {
-      if (props.Title === nomination.Title) {
+      if (props.Title === nomination.Title && props.Year === nomination.Year) {
         return true;
       }
     }
@@ -21,14 +21,14 @@ export default function Movie(props) {
   };
 
   return (
-    <article className="movie">
+    <article className="movie" key={props.id}>
       <img className="movie__thumbnail" src={props.Poster} alt="Movie" />
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
         <div className="movie__year">{props.Year}</div>
         <div>
           {isNominated() ? (
-            <p class="nominated_label">Nominated</p>
+            <p className="nominated_label">Nominated</p>
           ) : (
             <button className="nominate__btn" onClick={handleClick}>
               Nominate

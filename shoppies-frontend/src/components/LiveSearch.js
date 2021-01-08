@@ -4,17 +4,18 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import Results from './Results';
 import Nominations from './Nominations';
+import CompleteBanner from './CompleteBanner';
 
 export default function LiveSearch(props) {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
   const [nominations, setNominations] = useState([]);
+  const [open, setOpen] = useState(false);
+  const numNominated = nominations.length;
 
-  //check if results are nominated
-  // const isNominated = () => {
-  //   //does result
-  //   return true;
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //for when a user wants to add a nomination
   const addNomination = (movie) => {
@@ -62,13 +63,19 @@ export default function LiveSearch(props) {
     <>
       <header className="logo">
         <img className="branding" src="images/shoppiesbrand.png" alt="Brand" />
-        <SearchBar onSearch={(term) => setTerm(term)} />
+        <SearchBar key={'searchbar'} onSearch={(term) => setTerm(term)} />
+        <CompleteBanner
+          open={open}
+          numNominated={numNominated}
+          handleClose={handleClose}
+        />
       </header>
 
       <main>
         <div className="main-container">
           <div className="results-container">
             <Results
+              key={'results'}
               results={results}
               addNomination={addNomination}
               nominations={nominations}
