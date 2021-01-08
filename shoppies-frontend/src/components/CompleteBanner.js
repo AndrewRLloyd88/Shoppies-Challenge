@@ -30,27 +30,14 @@ const useStyles = makeStyles((theme) => ({
 export default function CompleteBanner(props) {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
-  const { numNominated } = props;
-
-  useEffect(() => {
-    console.log(numNominated);
-    if (numNominated === 5) {
-      setOpen(true);
-    }
-  }, [numNominated]);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         style={{
           display: 'flex',
           alignItems: 'center',
