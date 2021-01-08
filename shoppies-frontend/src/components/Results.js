@@ -16,6 +16,7 @@ export default function Results(props) {
           {...movie}
           addNomination={props.addNomination}
           nominations={props.nominations}
+          numNominated={props.numNominated}
         />
       </>
     );

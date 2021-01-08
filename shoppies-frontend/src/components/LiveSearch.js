@@ -79,6 +79,7 @@ export default function LiveSearch(props) {
               results={results}
               addNomination={addNomination}
               nominations={nominations}
+              numNominated={numNominated}
             />
           </div>
           <div className="results-container">

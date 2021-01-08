@@ -26,15 +26,23 @@ export default function Movie(props) {
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
         <div className="movie__year">{props.Year}</div>
-        <div>
-          {isNominated() ? (
-            <p className="nominated_label">Nominated</p>
-          ) : (
-            <button className="nominate__btn" onClick={handleClick}>
-              Nominate
-            </button>
-          )}
-        </div>
+        {props.numNominated !== 5 ? (
+          <div>
+            {isNominated() ? (
+              <p className="nominated_label">Nominated</p>
+            ) : (
+              <button className="nominate__btn" onClick={handleClick}>
+                Nominate
+              </button>
+            )}
+          </div>
+        ) : (
+          <div>
+            {isNominated() ? (
+              <p className="nominated_label">Nominated</p>
+            ) : null}
+          </div>
+        )}
       </div>
     </article>
   );
