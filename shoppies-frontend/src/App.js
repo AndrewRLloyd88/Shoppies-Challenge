@@ -89,5 +89,5 @@ export default function App() {
     }
   }, [state]);
 
-  return <LiveSearch />;
+  return <LiveSearch user={state} />;
 }

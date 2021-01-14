@@ -12,6 +12,7 @@ export default function LiveSearch(props) {
   const [nominations, setNominations] = useState([]);
   const [open, setOpen] = useState(false);
   const numNominated = nominations.length;
+  const userID = props.user.user.id;
 
   useEffect(() => {
     if (numNominated === 5) {
@@ -37,10 +38,15 @@ export default function LiveSearch(props) {
       movie_poster: movie.Poster,
     };
 
+    const user = {
+      userID: userID,
+    };
+
     axios.post(
       '/api/movies',
       {
         movieNomination,
+        user,
       },
       {
         headers: {

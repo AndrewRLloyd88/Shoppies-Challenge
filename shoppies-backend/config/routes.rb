@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :users
-    resources :movies
+    resources :movies do
+      put :nomination, on: :member
+    end
     resources :sessions
     resources :registrations
     delete :logout, to: "sessions#logout"
