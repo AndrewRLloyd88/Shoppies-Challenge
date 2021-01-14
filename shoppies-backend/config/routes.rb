@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :users
-    resources :nominations
+    resources :movies
     resources :sessions
     resources :registrations
     delete :logout, to: "sessions#logout"

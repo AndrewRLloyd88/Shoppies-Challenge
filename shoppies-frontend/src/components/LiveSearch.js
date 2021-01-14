@@ -30,6 +30,24 @@ export default function LiveSearch(props) {
       Year: movie.Year,
       Poster: movie.Poster,
     };
+
+    const movieNomination = {
+      movie_title: movie.Title,
+      movie_year: movie.Year,
+      movie_poster: movie.Poster,
+    };
+
+    axios.post(
+      '/api/movies',
+      {
+        movieNomination,
+      },
+      {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }
+    );
     setNominations((prevNominations) => {
       return [...prevNominations, newNomination];
     });
