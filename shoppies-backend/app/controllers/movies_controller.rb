@@ -3,7 +3,9 @@ class MoviesController < ApplicationController
 
 
   def create
+    if !Movie.exists?(movie_params)
     @movie = Movie.create!(movie_params)
+    end
   end
 
   private
