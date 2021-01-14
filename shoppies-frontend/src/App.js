@@ -3,55 +3,13 @@ import axios from 'axios';
 import './styles/App.css';
 import LiveSearch from './components/LiveSearch';
 import uuid from 'react-uuid';
+import { responsiveFontSizes } from '@material-ui/core';
 
 export default function App() {
   const [state, setState] = useState({
     loggedInStatus: 'NOT_LOGGED_IN',
     user: {},
   });
-
-  const checkLoginStatus = () => {
-    axios
-      .get('/api/logged_in', {
-        headers: {
-          authorization: `Token token=${localStorage.getItem('access_token')}`,
-        },
-        withCredentials: false,
-      })
-      .then((response) => {
-        if (
-          response.data.logged_in &&
-          state.loggedInStatus === 'NOT_LOGGED_IN'
-        ) {
-          setState({
-            loggedInStatus: 'LOGGED_IN',
-            user: response.data.user,
-          });
-        } else if (
-          !response.data.logged_in &&
-          state.loggedInStatus === 'LOGGED_IN'
-        ) {
-          setState({
-            loggedInStatus: 'NOT_LOGGED_IN',
-            user: {},
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('Explosions! ', error);
-      });
-  };
-  useEffect(() => {
-    checkLoginStatus();
-  });
-
-  const handleLogin = (data) => {
-    localStorage.setItem('access_token', data.user.access_token);
-    setState({
-      loggedInStatus: 'LOGGED_IN',
-      user: data.user,
-    });
-  };
 
   const createUser = () => {
     axios
@@ -71,12 +29,9 @@ export default function App() {
       )
       .then((response) => {
         if (response.data.status === 'created') {
-          localStorage.setItem('access_token', response.data.user.access_token);
-          setState({
-            loggedInStatus: 'LOGGED_IN',
-            slug: response.data.slug,
-          });
           console.log(response.data);
+          handleSuccessfulAuth(response.data);
+          // console.log(response.data.user);
         }
       })
       .catch((error) => {
@@ -84,8 +39,94 @@ export default function App() {
       });
   };
 
+  const handleSuccessfulAuth = (data) => {
+    localStorage.setItem('access_token', data.user.access_token);
+    setState({
+      loggedInStatus: 'LOGGED_IN',
+      user: data.user,
+    });
+  };
+
+  const handleAuth = () => {
+    axios
+      .post(
+        '/api/sessions',
+        {
+          slug: state.user.slug,
+        },
+        {
+          headers: {
+            authorization: `Token token=${localStorage.getItem(
+              'access_token'
+            )}`,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.logged_in) {
+          localStorage.setItem('access_token', response.data.user.access_token);
+          setState({
+            loggedInStatus: 'LOGGED_IN',
+            user: response.data.user,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('Error: ', error);
+      });
+  };
+
+  //check if a user exists where access token === access token (in local storage)
+  const checkLoginStatus = () => {
+    axios
+      .get('/api/logged_in', {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        if (
+          response.data.logged_in &&
+          state.loggedInStatus === 'NOT_LOGGED_IN'
+        ) {
+          setState({
+            loggedInStatus: 'LOGGED_IN',
+            user: response.data.user,
+          });
+          console.log('Logged in');
+          console.log(state);
+        } else if (
+          !response.data.logged_in &&
+          state.loggedInStatus === 'LOGGED_IN'
+        ) {
+          setState({
+            loggedInStatus: 'NOT_LOGGED_IN',
+            user: {},
+          });
+          console.log('Not Logged In');
+        }
+      })
+      .catch((error) => {
+        console.log('Explosions! ', error);
+      });
+  };
+
+  useEffect(() => {
+    console.log(state);
+    checkLoginStatus();
+    //check if there is an access token in the browser
+    console.log(state.loggedInStatus);
+    if (!localStorage.getItem('access_token')) {
+      createUser();
+    }
+  }, [state]);
+
   // useEffect(() => {
   //   createUser();
+  //   console.log(state);
   // }, []);
 
   return <LiveSearch />;
