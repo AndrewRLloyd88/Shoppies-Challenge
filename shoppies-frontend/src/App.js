@@ -3,7 +3,6 @@ import axios from 'axios';
 import './styles/App.css';
 import LiveSearch from './components/LiveSearch';
 import uuid from 'react-uuid';
-import { responsiveFontSizes } from '@material-ui/core';
 
 export default function App() {
   const [state, setState] = useState({
@@ -11,6 +10,7 @@ export default function App() {
     user: {},
   });
 
+  //posts a user to database and generates unique slug via UUID
   const createUser = () => {
     axios
       .post(
@@ -31,7 +31,6 @@ export default function App() {
         if (response.data.status === 'created') {
           console.log(response.data);
           handleSuccessfulAuth(response.data);
-          // console.log(response.data.user);
         }
       })
       .catch((error) => {
@@ -39,42 +38,13 @@ export default function App() {
       });
   };
 
+  //sets React state accordingly
   const handleSuccessfulAuth = (data) => {
     localStorage.setItem('access_token', data.user.access_token);
     setState({
       loggedInStatus: 'LOGGED_IN',
       user: data.user,
     });
-  };
-
-  const handleAuth = () => {
-    axios
-      .post(
-        '/api/sessions',
-        {
-          slug: state.user.slug,
-        },
-        {
-          headers: {
-            authorization: `Token token=${localStorage.getItem(
-              'access_token'
-            )}`,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        if (response.data.logged_in) {
-          localStorage.setItem('access_token', response.data.user.access_token);
-          setState({
-            loggedInStatus: 'LOGGED_IN',
-            user: response.data.user,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
   };
 
   //check if a user exists where access token === access token (in local storage)
@@ -87,7 +57,6 @@ export default function App() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         if (
           response.data.logged_in &&
           state.loggedInStatus === 'NOT_LOGGED_IN'
@@ -96,8 +65,7 @@ export default function App() {
             loggedInStatus: 'LOGGED_IN',
             user: response.data.user,
           });
-          console.log('Logged in');
-          console.log(state);
+          //catch all clause for setting states correctly
         } else if (
           !response.data.logged_in &&
           state.loggedInStatus === 'LOGGED_IN'
@@ -106,28 +74,20 @@ export default function App() {
             loggedInStatus: 'NOT_LOGGED_IN',
             user: {},
           });
-          console.log('Not Logged In');
         }
       })
       .catch((error) => {
-        console.log('Explosions! ', error);
+        console.log('Error: ', error);
       });
   };
 
   useEffect(() => {
-    console.log(state);
     checkLoginStatus();
     //check if there is an access token in the browser
-    console.log(state.loggedInStatus);
     if (!localStorage.getItem('access_token')) {
       createUser();
     }
   }, [state]);
-
-  // useEffect(() => {
-  //   createUser();
-  //   console.log(state);
-  // }, []);
 
   return <LiveSearch />;
 }

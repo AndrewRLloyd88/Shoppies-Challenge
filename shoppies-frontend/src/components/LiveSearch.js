@@ -14,7 +14,6 @@ export default function LiveSearch(props) {
   const numNominated = nominations.length;
 
   useEffect(() => {
-    console.log(numNominated);
     if (numNominated === 5) {
       setOpen(true);
     }
