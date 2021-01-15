@@ -7,9 +7,6 @@ class MoviesController < ApplicationController
     @movie = Movie.create!(movie_params)
     end
     @movie = Movie.where(movie_title: movie_params[:movie_title], movie_year: movie_params[:movie_year] ).first
-    # @movie = movie[:id]
-    puts @current_user.inspect
-    # @user = user_params[:userID]
     @current_user.nominated_movies << @movie
   end
 
@@ -21,7 +18,6 @@ class MoviesController < ApplicationController
   def destroy
     @nomination = Nomination.find(params[:id])
     Nomination.delete(@nomination)
-    # @current_user.nominated_movies.delete(@nomination)
   end
 
   private
