@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :users
+    resources :nominations
     resources :movies do
       put :nomination, on: :member
     end
