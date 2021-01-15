@@ -28,8 +28,8 @@ class SessionsController < ApplicationController
     if @user = User.authenticate_with_credentials(params)
     # Does an existing user put in the correct password?
     # if @user = User.authenticate_with_credentials(params[:slug])
-      # We save the user information in a browser cookie
-      # user remains logged in as they navigate page to page
+      # We distribute a token
+      # user remains 'logged_in' (remembered) as they navigate page to page
       @user.update_attributes(access_token: SecureRandom.hex)
       render json: {
         status: :created,
@@ -38,15 +38,6 @@ class SessionsController < ApplicationController
       }
     end
   end
-
-    # else
-    # # Returns a user to login form if they don't authenticate.
-    #  render json: {
-    #    status: 401
-    #  }
-    # end
-
-  # end
 
 #destroy cookie on logout
   def destroy
