@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import axios from 'axios';
 
 export default function Nomination(props) {
   const movieInfoClass = classnames('movie__info', {
@@ -8,6 +9,15 @@ export default function Nomination(props) {
 
   const handleClick = () => {
     props.deleteNomination(props.index);
+    axios.delete(
+      `api/movies/${props.id}`,
+      {},
+      {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }
+    );
   };
 
   return (

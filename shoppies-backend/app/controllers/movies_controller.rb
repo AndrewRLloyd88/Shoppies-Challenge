@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  skip_before_action :restrict_access, only: [ :movie_param]
+  skip_before_action :restrict_access, only: [ :movie_param, :destroy]
 
 
   def create
@@ -14,8 +14,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.joins(:nominations).select('*').where(nominations: {user_id: 1})
+    @movies = Movie.joins(:nominations).select('*').where(nominations: {user_id: @current_user.id})
     render json: @movies.to_json
+  end
+
+  def destroy
+    @nomination = Nomination.find(params[:id])
+    Nomination.delete(@nomination)
+    # @current_user.nominated_movies.delete(@nomination)
   end
 
   private
@@ -28,7 +34,6 @@ class MoviesController < ApplicationController
     ]
     );
   end
-
 
   def user_params
     params.require(:user)
