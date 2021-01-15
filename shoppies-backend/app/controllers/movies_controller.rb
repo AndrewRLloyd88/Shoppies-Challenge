@@ -11,8 +11,11 @@ class MoviesController < ApplicationController
     puts @current_user.inspect
     # @user = user_params[:userID]
     @current_user.nominated_movies << @movie
-    
-    
+  end
+
+  def index
+    @movies = Movie.joins(:nominations).select('*').where(nominations: {user_id: 1})
+    render json: @movies.to_json
   end
 
   private

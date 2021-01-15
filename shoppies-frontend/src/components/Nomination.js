@@ -12,10 +12,10 @@ export default function Nomination(props) {
 
   return (
     <article className="nomination">
-      <img className="movie__thumbnail" src={props.Poster} alt="Movie" />
+      <img className="movie__thumbnail" src={props.movie_poster} alt="Movie" />
       <div className={movieInfoClass}>
-        <div className="movie__name">{props.Title}</div>
-        <div className="movie__year">{props.Year}</div>
+        <div className="movie__name">{props.movie_title}</div>
+        <div className="movie__year">{props.movie_year}</div>
         <div>
           <button className="nominate__btn" onClick={handleClick}>
             Remove

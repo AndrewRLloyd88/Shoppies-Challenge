@@ -14,7 +14,22 @@ export default function LiveSearch(props) {
   const numNominated = nominations.length;
   const userID = props.user.user.id;
 
+  const getNominations = () => {
+    axios
+      .get('/api/movies', {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((result) => {
+        console.log(result.data);
+        setNominations([...result.data]);
+        console.log(nominations);
+      });
+  };
+
   useEffect(() => {
+    getNominations();
     if (numNominated === 5) {
       setOpen(true);
     }
