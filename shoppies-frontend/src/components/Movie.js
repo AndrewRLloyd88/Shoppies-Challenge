@@ -1,6 +1,6 @@
 import React from 'react';
-
 import classnames from 'classnames';
+import filmThumbnail from '../images/filmdefault.png';
 
 export default function Movie(props) {
   const movieInfoClass = classnames('movie__info', {
@@ -25,7 +25,11 @@ export default function Movie(props) {
 
   return (
     <article className="movie" key={props.id}>
-      <img className="movie__thumbnail" src={props.Poster} alt="Movie" />
+      <img
+        className="movie__thumbnail"
+        src={props.Poster === 'N/A' ? filmThumbnail : props.Poster}
+        alt="Movie"
+      />
       <div className={movieInfoClass}>
         <div className="movie__name">{props.Title}</div>
         <div className="movie__year">{props.Year}</div>
