@@ -9,7 +9,10 @@ export default function Movie(props) {
 
   const isNominated = () => {
     for (const nomination of props.nominations) {
-      if (props.Title === nomination.Title && props.Year === nomination.Year) {
+      if (
+        props.Title === nomination.movie_title &&
+        props.Year === nomination.movie_year
+      ) {
         return true;
       }
     }

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 import SearchBar from './SearchBar';
@@ -24,29 +24,21 @@ export default function LiveSearch(props) {
       .then((result) => {
         console.log(result.data);
         setNominations([...result.data]);
-        console.log(nominations);
       });
   };
 
-  useEffect(() => {
+  //delete nominations by index from the array
+  const deleteNomination = useCallback(() => {
     getNominations();
-    if (numNominated === 5) {
-      setOpen(true);
-    }
-  }, [numNominated]);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+    // setNominations((prevNominations) => {
+    //   return prevNominations.filter((nomination, index) => {
+    //     return index !== id;
+    //   });
+    // });
+  }, []);
 
   //for when a user wants to add a nomination
-  const addNomination = (movie) => {
-    const newNomination = {
-      Title: movie.Title,
-      Year: movie.Year,
-      Poster: movie.Poster,
-    };
-
+  const addNomination = useCallback((movie) => {
     const movieNomination = {
       movie_title: movie.Title,
       movie_year: movie.Year,
@@ -57,31 +49,39 @@ export default function LiveSearch(props) {
       userID: userID,
     };
 
-    axios.post(
-      '/api/movies',
-      {
-        movieNomination,
-        user,
-      },
-      {
-        headers: {
-          authorization: `Token token=${localStorage.getItem('access_token')}`,
+    axios
+      .post(
+        '/api/movies',
+        {
+          movieNomination,
+          user,
         },
-      }
-    );
-    setNominations((prevNominations) => {
-      return [...prevNominations, newNomination];
-    });
-  };
-
-  //delete nominations by index from the array
-  function deleteNomination(id) {
-    setNominations((prevNominations) => {
-      return prevNominations.filter((nomination, index) => {
-        return index !== id;
+        {
+          headers: {
+            authorization: `Token token=${localStorage.getItem(
+              'access_token'
+            )}`,
+          },
+        }
+      )
+      .then(() => {
+        getNominations();
       });
-    });
-  }
+    // setNominations((prevNominations) => {
+    //   return [...prevNominations, movieNomination];
+    // });
+  }, []);
+
+  useEffect(() => {
+    getNominations();
+    if (numNominated === 5) {
+      setOpen(true);
+    }
+  }, [numNominated, deleteNomination, addNomination]);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   //triggers on term changing
   useEffect(() => {

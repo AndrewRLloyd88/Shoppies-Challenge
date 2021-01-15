@@ -8,16 +8,22 @@ export default function Nomination(props) {
   });
 
   const handleClick = () => {
-    props.deleteNomination(props.index);
-    axios.delete(
-      `api/movies/${props.id}`,
-      {},
-      {
-        headers: {
-          authorization: `Token token=${localStorage.getItem('access_token')}`,
-        },
-      }
-    );
+    // props.deleteNomination(props.index);
+    axios
+      .delete(
+        `api/movies/${props.id}`,
+        {},
+        {
+          headers: {
+            authorization: `Token token=${localStorage.getItem(
+              'access_token'
+            )}`,
+          },
+        }
+      )
+      .then(() => {
+        props.deleteNomination();
+      });
   };
 
   return (
