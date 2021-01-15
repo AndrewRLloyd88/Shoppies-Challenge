@@ -8,7 +8,6 @@ export default function Nomination(props) {
   });
 
   const handleClick = () => {
-    // props.deleteNomination(props.index);
     axios
       .delete(
         `api/movies/${props.id}`,

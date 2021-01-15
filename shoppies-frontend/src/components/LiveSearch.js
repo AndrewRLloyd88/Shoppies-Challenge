@@ -30,11 +30,6 @@ export default function LiveSearch(props) {
   //delete nominations by index from the array
   const deleteNomination = useCallback(() => {
     getNominations();
-    // setNominations((prevNominations) => {
-    //   return prevNominations.filter((nomination, index) => {
-    //     return index !== id;
-    //   });
-    // });
   }, []);
 
   //for when a user wants to add a nomination
@@ -67,9 +62,6 @@ export default function LiveSearch(props) {
       .then(() => {
         getNominations();
       });
-    // setNominations((prevNominations) => {
-    //   return [...prevNominations, movieNomination];
-    // });
   }, []);
 
   useEffect(() => {
