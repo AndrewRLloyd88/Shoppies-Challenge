@@ -1,11 +1,27 @@
 import React from 'react';
 import classnames from 'classnames';
+import Button from '@material-ui/core/Button';
 import filmThumbnail from '../images/filmdefault.png';
+import { makeStyles } from '@material-ui/core/styles';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import StarsIcon from '@material-ui/icons/StarBorder';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+    backgroundColor: '#00e676',
+    height: '40px',
+    '&:hover': {
+      backgroundColor: 'rgb(0, 161, 82)',
+    },
+  },
+}));
 
 export default function Movie(props) {
   const movieInfoClass = classnames('movie__info', {
     'movie__info--explicit': props.collectionExplicitness === 'explicit',
   });
+  const classes = useStyles();
 
   const isNominated = () => {
     for (const nomination of props.nominations) {
@@ -38,9 +54,13 @@ export default function Movie(props) {
             {isNominated() ? (
               <p className="nominated_label">Nominated</p>
             ) : (
-              <button className="nominate__btn" onClick={handleClick}>
+              <Button
+                className={classes.button}
+                onClick={handleClick}
+                startIcon={<AddCircleIcon />}
+              >
                 Nominate
-              </button>
+              </Button>
             )}
           </div>
         ) : (
