@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CompleteBanner(props) {
-  console.log(props);
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
 

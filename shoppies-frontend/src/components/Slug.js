@@ -41,9 +41,7 @@ const Slug = (props) => {
   useEffect(() => {
     getTotal();
     axios.get(`api/nominations/${slug}`).then((response) => {
-      console.log(response);
       setNominations([...response.data]);
-      console.log(nominations);
     });
   }, []);
 

@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import Results from './Results';
 import Nominations from './Nominations';
 import CompleteBanner from './CompleteBanner';
+import uuid from 'react-uuid';
 
 export default function LiveSearch(props) {
   const [term, setTerm] = useState('');
@@ -22,7 +23,6 @@ export default function LiveSearch(props) {
         },
       })
       .then((result) => {
-        console.log(result.data);
         setNominations([...result.data]);
       });
   };
@@ -113,7 +113,7 @@ export default function LiveSearch(props) {
         <div className="main-container">
           <div className="results-container">
             <Results
-              key={'results'}
+              key={uuid()}
               results={results}
               addNomination={addNomination}
               nominations={nominations}
@@ -122,6 +122,7 @@ export default function LiveSearch(props) {
           </div>
           <div className="results-container">
             <Nominations
+              key={uuid()}
               nominations={nominations}
               deleteNomination={deleteNomination}
             />
