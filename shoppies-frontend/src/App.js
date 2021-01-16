@@ -56,7 +56,7 @@ export default function App() {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
-        withCredentials: true,
+        withCredentials: false,
       })
       .then((response) => {
         if (

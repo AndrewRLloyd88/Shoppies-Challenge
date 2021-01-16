@@ -77,9 +77,9 @@ export default function LiveSearch(props) {
 
   //triggers on term changing
   useEffect(() => {
-    const mainURL = `http://www.omdbapi.com/?s=${term}&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`;
+    const mainURL = `https://www.omdbapi.com/?s=${term}&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`;
 
-    const fallbackURL = `http://www.omdbapi.com/?t=${term}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`;
+    const fallbackURL = `https://www.omdbapi.com/?t=${term}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`;
 
     axios.get(mainURL).then((response) => {
       if (response.data.Response === 'True') {

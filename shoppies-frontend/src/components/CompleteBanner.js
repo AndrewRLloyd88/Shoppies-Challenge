@@ -73,9 +73,11 @@ export default function CompleteBanner(props) {
           <p>
             You can share your nominations with this link:
             <br></br>
-            <a href={`http://localhost:3000/${props.user.user.slug}`}>
+            <a
+              href={`https://theshoppies-movie-awards.herokuapp.com/${props.user.user.slug}`}
+            >
               <span className={classes.link}>
-                localhost:3000/
+                https://theshoppies-movie-awards.herokuapp.com/
                 {props.user.user.slug}
               </span>
             </a>
