@@ -105,6 +105,7 @@ export default function LiveSearch(props) {
           open={open}
           numNominated={numNominated}
           handleClose={handleClose}
+          user={props.user}
         />
       </header>
 
