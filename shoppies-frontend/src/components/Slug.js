@@ -1,10 +1,19 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Nomination from './Nomination';
+import UserNomination from './UserNomination';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 const Slug = (props) => {
-  const history = useHistory();
   let slug = props.match.params.slug;
   const [nominations, setNominations] = useState([]);
   const [total, setTotal] = useState(null);
@@ -35,7 +44,7 @@ const Slug = (props) => {
             ? nominations.map((nomination, index) => {
                 return (
                   <>
-                    <Nomination
+                    <UserNomination
                       className="usr_nomination"
                       key={index}
                       index={index}
@@ -48,15 +57,32 @@ const Slug = (props) => {
             : null}
         </div>
       </div>
-      <div>
-        {total !== null ? (
-          <p>{total} people have voted for their favorites</p>
-        ) : null}
+      <div className="usr_nomination_footer">
+        <div>
+          <img className="banner" src="images/shoppiesbrand.png" alt="Brand" />
+        </div>
+        <div className="ticket_area">
+          {total !== null ? (
+            <p>
+              <span className="highlight">{total}</span> people have voted for
+              their favorites.
+            </p>
+          ) : null}
+
+          <span>What will you nominate?</span>
+          <div>
+            <Link className="home" to="/">
+              <Button
+                variant="outlined"
+                color="secondary"
+                href="#outlined-buttons"
+              >
+                Get Voting...
+              </Button>
+            </Link>
+          </div>
+        </div>
       </div>
-      <p>What will you nominate?</p>
-      <Link className="home" to="/">
-        <button>Get Voting...</button>
-      </Link>
     </div>
   );
 };
