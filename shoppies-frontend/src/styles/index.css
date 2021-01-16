@@ -73,6 +73,7 @@ section {
 
 .main-container {
   display: flex;
+  justify-content: center;
 }
 
 .results-container {
@@ -81,12 +82,14 @@ section {
 
 .movie {
   display: flex;
+  justify-content: center;
   color: #fefefe;
   margin-bottom: 0.5rem;
 }
 
 .nomination {
   display: flex;
+  justify-content: center;
   color: #fefefe;
   margin-bottom: 0.5rem;
 }
@@ -241,4 +244,21 @@ span {
 
 .highlight {
   color: gold;
+}
+
+.col-title {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: hidden;
+}
+
+.searching {
+  display: flex;
+  align-items: center;
+  color: white;
 }

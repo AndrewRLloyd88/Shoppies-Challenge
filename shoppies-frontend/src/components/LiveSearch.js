@@ -6,12 +6,14 @@ import Results from './Results';
 import Nominations from './Nominations';
 import CompleteBanner from './CompleteBanner';
 import uuid from 'react-uuid';
+import status from '../images/status.png';
 
 export default function LiveSearch(props) {
   const [term, setTerm] = useState('');
   const [results, setResults] = useState([]);
   const [nominations, setNominations] = useState([]);
   const [open, setOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const numNominated = nominations.length;
   const userID = props.user.user.id;
 
@@ -77,6 +79,9 @@ export default function LiveSearch(props) {
 
   //triggers on term changing
   useEffect(() => {
+    if (term) {
+      setIsSearching(true);
+    }
     const mainURL = `http://www.omdbapi.com/?s=${term}&type=movie&page=1&apikey=${process.env.REACT_APP_API_KEY}`;
 
     const fallbackURL = `http://www.omdbapi.com/?t=${term}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`;
@@ -84,12 +89,15 @@ export default function LiveSearch(props) {
     axios.get(mainURL).then((response) => {
       if (response.data.Response === 'True') {
         setResults([...response.data.Search]);
+        setIsSearching(false);
       } else if (response.data.Response === 'False') {
         axios.get(fallbackURL).then((response) => {
           if (response.data.Response === 'True') {
             setResults([response.data]);
+            setIsSearching(false);
           } else {
             setResults([]);
+            setIsSearching(false);
           }
         });
       }
@@ -101,6 +109,12 @@ export default function LiveSearch(props) {
       <header className="logo">
         <img className="branding" src="images/shoppiesbrand.png" alt="Brand" />
         <SearchBar key={'searchbar'} onSearch={(term) => setTerm(term)} />
+        {isSearching && (
+          <div className="searching">
+            <p>searching...</p>
+            <img className="spinner" src={status}></img>
+          </div>
+        )}
         <CompleteBanner
           open={open}
           numNominated={numNominated}
@@ -112,6 +126,12 @@ export default function LiveSearch(props) {
       <main>
         <div className="main-container">
           <div className="results-container">
+            {term !== '' ? (
+              <p className="col-title">
+                Your search for {term} returned {results.length}{' '}
+                {results.length > 1 ? 'results' : 'result'}:
+              </p>
+            ) : null}
             <Results
               key={uuid()}
               results={results}
@@ -120,7 +140,9 @@ export default function LiveSearch(props) {
               numNominated={numNominated}
             />
           </div>
+
           <div className="results-container">
+            <p className="col-title">Your Nominations:</p>
             <Nominations
               key={uuid()}
               nominations={nominations}
