@@ -130,6 +130,11 @@ section {
   font-size: 1.2rem;
 }
 
+.usr_nomination_title {
+  color: white;
+  size: 30px;
+}
+
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -172,6 +177,19 @@ section {
 .filters__form-group {
   display: flex;
   align-items: center;
+}
+
+.usr_nomination_container {
+  display: flex;
+}
+
+.usr_nomination_container article {
+  display: flex;
+  flex-direction: column;
+}
+
+.usr_nomination_container .nomination {
+  flex-direction: row;
 }
 
 /* .filters__checkbox {

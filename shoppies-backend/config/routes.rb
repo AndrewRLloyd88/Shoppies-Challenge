@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :users
+    get :slug, to: "nominations#slug"
+    get :total, to: "nominations#total"
     resources :nominations
     resources :movies do
       put :nomination, on: :member

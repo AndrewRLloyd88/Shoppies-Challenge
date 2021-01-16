@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import './styles/App.css';
 import LiveSearch from './components/LiveSearch';
 import uuid from 'react-uuid';
+import Slug from './components/Slug';
 
 export default function App() {
   const [state, setState] = useState({
@@ -89,5 +91,16 @@ export default function App() {
     }
   }, [state]);
 
-  return <LiveSearch user={state} />;
+  return (
+    <Router>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => <LiveSearch user={state} />}
+        ></Route>
+        <Route path="/:slug" component={Slug} />
+      </Switch>
+    </Router>
+  );
 }
