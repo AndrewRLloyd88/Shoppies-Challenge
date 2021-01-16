@@ -91,7 +91,6 @@ export default function CompleteBanner(props) {
             onClick={props.handleClose}
             className={classes.button}
             variant="outlined"
-            href="#outlined-buttons"
           >
             Gotcha!
           </Button>

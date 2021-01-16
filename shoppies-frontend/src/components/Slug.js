@@ -5,10 +5,24 @@ import UserNomination from './UserNomination';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
+function getButtonStyle() {
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+}
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
+  button: {
+    marginTop: '2em',
+    backgroundColor: 'black',
+    color: 'gold',
+    textDecoration: 'none',
+    '&:hover': {
+      background: 'gold',
+      color: 'black',
     },
   },
 }));
@@ -32,6 +46,8 @@ const Slug = (props) => {
       console.log(nominations);
     });
   }, []);
+
+  const classes = useStyles();
 
   return (
     <div className="usr_nomination_container">
@@ -71,14 +87,8 @@ const Slug = (props) => {
 
           <span>What will you nominate?</span>
           <div>
-            <Link className="home" to="/">
-              <Button
-                variant="outlined"
-                color="secondary"
-                href="#outlined-buttons"
-              >
-                Get Voting...
-              </Button>
+            <Link style={{ textDecoration: 'none' }} to="/">
+              <Button className={classes.button}>Get Voting...</Button>
             </Link>
           </div>
         </div>
