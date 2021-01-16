@@ -262,3 +262,7 @@ span {
   align-items: center;
   color: white;
 }
+
+article:hover .movie__info {
+  background-color: #24232e;
+}
