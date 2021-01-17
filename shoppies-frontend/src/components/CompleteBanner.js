@@ -74,10 +74,10 @@ export default function CompleteBanner(props) {
             You can share your nominations by copying this link:
             <br></br>
             <a
-              href={`https://theshoppies-movie-awards.herokuapp.com/${props.user.user.slug}`}
+              href={`https://theshoppies-movie-awards.netlify.app/${props.user.user.slug}`}
             >
               <span className={classes.link}>
-                https://theshoppies-movie-awards.herokuapp.com/
+                https://theshoppies-movie-awards.netlify.app/
                 {props.user.user.slug}
               </span>
             </a>
