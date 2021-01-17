@@ -111,7 +111,9 @@ We'd like a simple to use interface that makes it easy to:
 - As a user I should be able to nominate a film.
 - As a user I should be able to un-nominate a film.
 - As a user I should be able to search for films to nominate
+- As a user I should be able to see a list of the films I have nominated
 - As a user I should not be able to nominate the same film twice
+- Users must be able to see at least a title, year of release and a nominate button.
 - As a user I should be able to nominate a film if it is a remake or reboot and has a different year of release but the same title as a prior release
 - Users should have the ability to share a link with their nominations in
 - Users nominations should be remembered when they return to the page
