@@ -8,13 +8,13 @@ See my nominations here! https://theshoppies-movie-awards.netlify.app/70b4c0e-11
 
 ## Table of Contents
 
-- [Getting Started](##Getting-Started)
+- [Getting Started](#Getting-Started)
 - [Screenshots](#Screenshots)
 - [Stretch Features Added](#Stretch-Features-Added)
 - [Future Improvements and updates](#Future-Improvements-and-updates)
-- [Dependencies](#dependencies)
+- [Project Dependencies](#Project-Dependencies)
 - [The Challenge](#The-Challenge)
-  - [Technical Requirements](##Technical-requirements)
+  - [Technical Requirements](#Technical-requirements)
   - [Extras](#Extras)
 - [User Stories](#User-Stories)
 - [Project Dependencies](#Project-Dependencies)
