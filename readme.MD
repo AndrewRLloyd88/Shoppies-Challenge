@@ -2,7 +2,7 @@
 
 ## The Shoppies is deployed on Heroku
 
-Try out the live version of the app at https://theshoppies-movie-awards.netlify.app/ or at https://theshoppies-movie-awards.herokuapp.com/ You may need to wait for a few moments for Heroku to load up as Heroku puts the server to sleep after inactivity.
+Try out the live version of the app at https://theshoppies-movie-awards.netlify.app/
 
 See my nominations here! https://theshoppies-movie-awards.netlify.app/70b4c0e-111-f3b-51-53bbe685f18
 
