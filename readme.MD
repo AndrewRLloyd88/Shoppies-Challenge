@@ -1,6 +1,6 @@
 # UX Developer Intern & Web Developer Intern Challenge - Summer 2021 - The Shoppies
 
-## The Shoppies is deployed on Heroku
+## The Shoppies is deployed on Netlify!
 
 Try out the live version of the app at https://theshoppies-movie-awards.netlify.app/
 
